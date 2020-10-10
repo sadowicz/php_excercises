@@ -1,0 +1,9 @@
+#! /bin/bash
+
+DIR=$(dirname "$0")
+NAME=$1
+
+SCRIPT=$DIR/../run_$NAME.sh
+
+$SCRIPT
+
