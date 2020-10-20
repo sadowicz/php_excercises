@@ -4,8 +4,8 @@
         <?php
         if($_SERVER["REQUEST_METHOD"] == "POST")
         {
-            $user = $_POST["usr"];
-            $password = $_POST["passwd"];
+            $user = $_POST["user"];
+            $password = $_POST["password"];
 
             if($user == "" || $password == "")
             {
@@ -24,10 +24,10 @@
         {
             echo '
             <form method="post" action="'.htmlspecialchars($_SERVER["PHP_SELF"]).'">
-                <label for="usr">User: </label>
-                <input type="text" id="usr" name="usr"><br>
-                <label for="passwd">Password: </label>
-                <input type="password" id="passwd" name="passwd"><br>
+                <label for="user">User: </label>
+                <input type="text" id="user" name="user"><br>
+                <label for="password">Password: </label>
+                <input type="password" id="password" name="password"><br>
                 <input type="submit" value="Login">
             </form>';
         }
