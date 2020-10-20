@@ -22,13 +22,14 @@
         }
         else
         {
-            echo '<form method="post" action="'.htmlspecialchars($_SERVER["PHP_SELF"]).'">
-            <label for="usr">User: </label>
-            <input type="text" id="usr" name="usr"><br>
-            <label for="passwd">Password: </label>
-            <input type="password" id="passwd" name="passwd"><br>
-            <input type="submit" value="Login">
-        </form>';
+            echo '
+            <form method="post" action="'.htmlspecialchars($_SERVER["PHP_SELF"]).'">
+                <label for="usr">User: </label>
+                <input type="text" id="usr" name="usr"><br>
+                <label for="passwd">Password: </label>
+                <input type="password" id="passwd" name="passwd"><br>
+                <input type="submit" value="Login">
+            </form>';
         }
         ?>
     </body>
