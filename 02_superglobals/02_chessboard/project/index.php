@@ -42,7 +42,6 @@ session_start();
     </style>
 </head>
 <body>
-
 <?php
 
     if(!isset($_SESSION["sx"])){
@@ -53,6 +52,9 @@ session_start();
         $_SESSION["sz"] = 10;
     }
 
+    $color = "gray";
+    $colorFromPOST = "";
+
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         if(isset($_POST["sx"]) && isset($_POST["sz"])){
             $_SESSION["sx"] = $_POST["sx"];
@@ -61,19 +63,18 @@ session_start();
 
         if(isset($_POST["color"])){
             setcookie("color", $_POST["color"], time() + (86400 * 2), "/");
+            $color = $colorFromPOST = $_POST["color"];
         }
     }
 
-    $color = "gray";
-    if(isset($_COOKIE["color"])){
-        //setcookie("color", "gray", time() + (86400 * 2), "/");
-        $GLOBALS["color"] = $_COOKIE["color"];
+    if(isset($_COOKIE["color"]) && $colorFromPOST == ""){
+        $color = $_COOKIE["color"];
     }
 
     for($rows = 0; $rows < $_SESSION["sz"]; $rows++){
         echo "<div>";
         for($cols = 0; $cols < $_SESSION["sx"]; $cols++){
-            echo "<a class=\"block ".$GLOBALS["color"]."\" href=\"?x=".$cols."&z=".$rows."\"></a>";
+            echo '<a class="block '.$color.'" href="?x='.$cols.'&z='.$rows.'"></a>';
         }
         echo "</div>";
     }
