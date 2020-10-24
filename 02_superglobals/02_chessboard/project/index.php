@@ -1,6 +1,7 @@
 <?php
 error_reporting(-1);
 ini_set("display_errors", "On");
+session_start();
 ?>
 <html lang="en">
 <head>
@@ -42,24 +43,42 @@ ini_set("display_errors", "On");
 </head>
 <body>
 
-<div>
-    <a class="block gray" href="?x=0&z=0"></a>
-    <a class="block gray" href="?x=1&z=0"></a>
-    <a class="block gray" href="?x=2&z=0"></a>
-</div>
-<div>
-    <a class="block gray" href="?x=0&z=1"></a>
-    <a class="block gray" href="?x=1&z=1"></a>
-    <a class="block gray" href="?x=2&z=1"></a>
-</div>
-<div>
-    <a class="block gray" href="?x=0&z=2"></a>
-    <a class="block gray" href="?x=1&z=2"></a>
-    <a class="block gray" href="?x=2&z=2"></a>
-</div>
+<?php
 
+    if(!isset($_SESSION["sx"])){
+        $_SESSION["sx"] = 10;
+    }
+
+    if(!isset($_SESSION["sz"])){
+        $_SESSION["sz"] = 10;
+    }
+
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+        if(isset($_POST["sx"]) && isset($_POST["sz"])){
+            $_SESSION["sx"] = $_POST["sx"];
+            $_SESSION["sz"] = $_POST["sz"];
+        }
+
+        if(isset($_POST["color"])){
+            setcookie("color", $_POST["color"], time() + (86400 * 2), "/");
+        }
+    }
+
+    $color = "gray";
+    if(isset($_COOKIE["color"])){
+        //setcookie("color", "gray", time() + (86400 * 2), "/");
+        $GLOBALS["color"] = $_COOKIE["color"];
+    }
+
+    for($rows = 0; $rows < $_SESSION["sz"]; $rows++){
+        echo "<div>";
+        for($cols = 0; $cols < $_SESSION["sx"]; $cols++){
+            echo "<a class=\"block ".$GLOBALS["color"]."\" href=\"?x=".$cols."&z=".$rows."\"></a>";
+        }
+        echo "</div>";
+    }
+?>
 <br/>
-
 <form method="post">
     <label>
         Columns:
