@@ -43,11 +43,7 @@ session_start();
 </head>
 <body>
 <?php
-
-    function line($x, $z, $dx, $dz, $b){
-        return $dz * $x - $dx * $z + $b * $dx;
-    }
-
+    //Set up initial coords
     if(!isset($_SESSION["sx"])){
         $_SESSION["sx"] = 10;
     }
@@ -72,9 +68,11 @@ session_start();
         $_SESSION["endZ"] = -1;
     }
 
+    //Set up initial color
     $color = "gray";
     $colorFromPOST = "";
 
+    //Get info from POST method
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         if(isset($_POST["sx"]) && isset($_POST["sz"])){
             $_SESSION["sx"] = $_POST["sx"];
@@ -87,15 +85,18 @@ session_start();
         }
     }
 
+    //Update color based on cookies
     if(isset($_COOKIE["color"]) && $colorFromPOST == ""){
         $color = $_COOKIE["color"];
     }
 
-    if(!isset($_SESSION["patternArr"])){
+    //Set up patternArray
+
+    if(!isset($_SESSION["patternArr"])){    // Initialize
         $_SESSION["patternArr"] = array_fill(0, $_SESSION["sz"],
             array_fill(0, $_SESSION["sx"], $color)); // 2D array with colors of each <a> block
     }
-    else{
+    else{   //when initialized
         for($row = 0; $row < $_SESSION["sz"]; $row++){
             for($col = 0; $col < $_SESSION["sx"]; $col++){
                 if($_SESSION["patternArr"][$row][$col] != "white"){
@@ -104,6 +105,8 @@ session_start();
             }
         }
     }
+
+    //Get info from GET method
 
     if($_SERVER["REQUEST_METHOD"] == "GET"){
         if(isset($_GET["x"]) && isset($_GET["z"])){
@@ -118,7 +121,7 @@ session_start();
         }
     }
 
-
+    //Pattern drawing
 
     if($_SESSION["startX"] != -1 && $_SESSION["startZ"] != -1 && $_SESSION["endX"] != -1 && $_SESSION["endZ"] != -1){
         // Draw line into patternArr:
@@ -179,6 +182,8 @@ session_start();
         $_SESSION["endX"] = -1;
         $_SESSION["endZ"] = -1;
     }
+
+    //Draw chessboard
 
     for($rows = 0; $rows < $_SESSION["sz"]; $rows++){
         echo "<div>";
