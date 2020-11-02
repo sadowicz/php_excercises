@@ -1,19 +1,13 @@
-<html lang="en">
-<head>
-    <title>Pretty URL</title>
+<?php
+$parts = explode('/', $_SERVER['REQUEST_URI']);
+array_shift($parts);
+$page = $parts[0];
 
-    <style type="text/css">
-        .error {
-            color: red;
-        }
-    </style>
-</head>
-<body>
-<div>
-    <a href="index.php">Home</a>
-    <a href="about.php">About</a>
-    <a href="users.php">Users</a>
-</div>
-<p>Welcome on homepage!</p>
-</body>
-</html>
+if($page == ''){
+    $page = 'home';
+}
+elseif(!file_exists('../views/'.$page.'.php')){
+    $page = '404';
+}
+include '../views/layout.php'
+?>
