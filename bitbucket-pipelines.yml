@@ -7,7 +7,7 @@ pipelines:
           - composer
           - node
         script:
-          - pushd 03_pretty_url/02_exercise/tests/
+          - pushd 04_object_oriented/02_exercise/tests/
           - composer install
           - php -S localhost:8888 -t ../project/public &
           - vendor/bin/codecept run --xml test_report.xml
