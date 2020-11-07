@@ -2,10 +2,26 @@
 
 namespace Config;
 
-class Directory
-{
-    public static function set($root)
-    {
-       	// TODO: ... 
+class Directory {
+    private static string $root;
+
+    public static function set(string $root) {
+       	Directory::$root = $root;
+    }
+
+    public static function root() : string {
+        return Directory::$root;
+    }
+
+    public static function storge() : string {
+        return Directory::root().'storage/';
+    }
+
+    public static function view() : string {
+        return Directory::root().'view/';
+    }
+
+    public static function src() : string {
+        return Directory::root().'src/';
     }
 }
