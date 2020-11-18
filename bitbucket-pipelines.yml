@@ -6,11 +6,23 @@ pipelines:
         caches:
           - composer
           - node
+        services:
+          - mysql
         script:
-          - pushd 04_object_oriented/02_exercise/tests/
+          - while ! timeout 1 bash -c "echo > /dev/tcp/localhost/3306"; do echo "Waiting for MySQL..."; sleep 1; done
+          - pushd 05_data_objects/03_exercise/tests/
           - composer install
           - php -S localhost:8888 -t ../project/public &
           - vendor/bin/codecept run --xml test_report.xml
           - killall php
           - popd
           - .ci/collect_reports.sh
+definitions:
+  services:
+    mysql:
+      image: mysql:8.0
+      variables:
+        MYSQL_ROOT_PASSWORD: root123
+        MYSQL_DATABASE: test
+        MYSQL_USER: test
+        MYSQL_PASSWORD: test123
