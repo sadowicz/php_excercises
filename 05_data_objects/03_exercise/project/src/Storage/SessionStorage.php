@@ -4,8 +4,7 @@ namespace Storage;
 
 use Concept\Distinguishable;
 
-class SessionStorage implements Storage
-{
+class SessionStorage implements Storage {
     public function __construct() {
         session_start();
         $_SESSION["storage"] = [];
