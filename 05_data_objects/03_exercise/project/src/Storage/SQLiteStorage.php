@@ -23,6 +23,7 @@ class SQLiteStorage implements Storage
     public function loadAll(): array
     {
         // TODO: ...
+        return [];
     }
 
 }

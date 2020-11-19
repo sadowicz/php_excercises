@@ -19,5 +19,7 @@ class SessionStorage implements Storage
     public function loadAll(): array
     {
         // TODO: ...
+        return [];
+
     }
 }
