@@ -8,13 +8,20 @@ pipelines:
           - node
         services:
           - mysql
+          - redis
         script:
           - while ! timeout 1 bash -c "echo > /dev/tcp/localhost/3306"; do echo "Waiting for MySQL..."; sleep 1; done
-          - pushd 05_data_objects/03_exercise/tests/
-          - composer install
-          - php -S localhost:8888 -t ../project/public &
-          - vendor/bin/codecept run --xml test_report.xml
-          - killall php
+          - while ! timeout 1 bash -c "echo > /dev/tcp/localhost/6379"; do echo "Waiting for Redis..."; sleep 1; done
+          - pushd 06_dependency_manager/02_exercise/
+          -   pushd project/
+          -     composer install
+          -     php -S localhost:8888 -t public &
+          -   popd
+          -   pushd tests/
+          -     composer install
+          -     vendor/bin/codecept run --xml test_report.xml
+          -   popd
+          -   killall php
           - popd
           - .ci/collect_reports.sh
 definitions:
@@ -26,3 +33,5 @@ definitions:
         MYSQL_DATABASE: test
         MYSQL_USER: test
         MYSQL_PASSWORD: test123
+    redis:
+      image: redis
