@@ -1,0 +1,19 @@
+{
+    "name": "sadowicz/dependency_manager",
+    "description": "06_dependency_manager excercise",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Filip Sądowicz",
+            "email": "sadowicz31@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "predis/predis": "^1.1"
+    },
+    "autoload": {
+        "classmap": ["src/"]
+    }
+}
