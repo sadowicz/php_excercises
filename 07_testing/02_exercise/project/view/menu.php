@@ -1,6 +1,7 @@
 <div>
     <div>
-        <!-- TODO: ... -->
+        <a href="/auth/login">Login</a>
+        <a href="/auth/register">Register</a>
     </div>
     <hr>
     <a href="/home">Home</a>
