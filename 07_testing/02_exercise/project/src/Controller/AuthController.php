@@ -6,5 +6,13 @@ use Model\User;
 
 class AuthController extends Controller
 {
-    // TODO: ...
+    public function register()
+    {
+        return ["auth.register", ["title" => "Register"]];
+    }
+
+    public function confirmation_notice()
+    {
+        return ["auth.confirmation_notice", ["title" => "Confirmation notice"]];
+    }
 }
