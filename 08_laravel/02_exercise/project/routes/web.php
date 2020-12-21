@@ -16,3 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/comments', 'App\Http\Controllers\CommentController@show');
+Route::get('/comments/{id}', 'App\Http\Controllers\CommentController@showComment');
