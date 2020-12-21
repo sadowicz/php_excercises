@@ -12,9 +12,13 @@ pipelines:
         script:
           - while ! timeout 1 bash -c "echo > /dev/tcp/localhost/3306"; do echo "Waiting for MySQL..."; sleep 1; done
           - while ! timeout 1 bash -c "echo > /dev/tcp/localhost/6379"; do echo "Waiting for Redis..."; sleep 1; done
-          - pushd 07_testing/02_exercise/project/
+          - pushd 08_laravel/02_exercise/project/
           -   composer install
-          -   php -S localhost:8888 -t public &
+          -   cp .env.example .env
+          -   php artisan key:generate
+          -   php artisan serve --port 8888 &
+          -   while ! timeout 1 bash -c "echo > /dev/tcp/localhost/8888"; do echo "Waiting for server..."; sleep 1; done
+          -   vendor/bin/codecept run
           -   vendor/bin/codecept run --xml test_report.xml
           -   killall php
           - popd
