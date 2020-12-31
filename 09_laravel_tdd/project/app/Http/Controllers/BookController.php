@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -28,5 +29,15 @@ class BookController extends Controller
             'title'=>'required',
             'description'=>'required'
         ]);
+
+        $book = new Book();
+
+        $book->isbn = request('isbn');
+        $book->title = request('title');
+        $book->description = request('description');
+
+        $book->save();
+
+        return redirect('/books');
     }
 }
