@@ -13,6 +13,20 @@ class BookController extends Controller
 
     public function index() {
 
-        return view('books');
+        return view('books.index');
+    }
+
+    public function create() {
+
+        return view('books.create');
+    }
+
+    public function store() {
+
+        request()->validate([
+            'isbn'=>'required|digits:13',
+            'title'=>'required',
+            'description'=>'required'
+        ]);
     }
 }
