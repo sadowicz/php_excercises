@@ -17,6 +17,11 @@ class BookController extends Controller
         return view('books.index');
     }
 
+    public function show(Book $book) {
+
+        return view('books.show')->withBook($book);
+    }
+
     public function create() {
 
         return view('books.create');
