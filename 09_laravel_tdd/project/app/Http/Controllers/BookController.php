@@ -43,6 +43,6 @@ class BookController extends Controller
 
         $book->save();
 
-        return redirect('/books');
+        return redirect('/books/'.$book->id);
     }
 }
