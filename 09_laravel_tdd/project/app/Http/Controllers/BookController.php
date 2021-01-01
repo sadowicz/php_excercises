@@ -47,4 +47,27 @@ class BookController extends Controller
 
         return redirect('/books/'.$book->id);
     }
+
+    public function edit(Book $book) {
+
+        return view('books.edit')->withBook($book);
+    }
+
+    public function update(Book $book) {
+
+        request()->validate([
+            'isbn'=>'required|digits:13',
+            'title'=>'required',
+            'description'=>'required'
+        ]);
+
+        $book->isbn = request('isbn');
+        $book->title = request('title');
+        $book->description = request('description');
+
+        $book->save();
+
+        return redirect('/books/'.$book->id);
+    }
+
 }

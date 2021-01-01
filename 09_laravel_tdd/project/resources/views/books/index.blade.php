@@ -21,7 +21,6 @@
     <p>No books in database.</p>
 @endif
 
-
 <form method="GET" action="/books/create">
     <button>Create new...</button>
 </form>
