@@ -70,4 +70,10 @@ class BookController extends Controller
         return redirect('/books/'.$book->id);
     }
 
+    public function destroy(Book $book) {
+
+        $book->delete();
+
+        return redirect('/books');
+    }
 }

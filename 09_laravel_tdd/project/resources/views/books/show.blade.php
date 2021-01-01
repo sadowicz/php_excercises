@@ -8,3 +8,8 @@
 <form method="GET" action="/books/{{$book->id}}/edit">
     <button>Edit</button>
 </form>
+<form method="POST" action="/books/{{$book->id}}">
+    @csrf
+    @method('DELETE')
+    <button>Delete</button>
+</form>
