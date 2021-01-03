@@ -1,5 +1,5 @@
 <h2>Editing a book</h2>
-<form method="POST" action="/books/{{$book->id}}">
+<form method="POST" action="{{$book->path()}}">
     @csrf
     @method('PUT')
     <div>
@@ -18,7 +18,7 @@
     </div>
     <div>
         <label>Description</label>
-        <input type="text" name="description" value="{{$book->description}}">
+        <input type="textarea" name="description" value="{{$book->description}}">
         @error('description')
         <li>{{$errors->first('description')}}</li>
         @enderror

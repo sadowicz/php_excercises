@@ -31,21 +31,9 @@ class BookController extends Controller
 
     public function store() {
 
-        request()->validate([
-            'isbn'=>'required|digits:13',
-            'title'=>'required',
-            'description'=>'required'
-        ]);
+        $book = Book::create($this->validateBook());
 
-        $book = new Book();
-
-        $book->isbn = request('isbn');
-        $book->title = request('title');
-        $book->description = request('description');
-
-        $book->save();
-
-        return redirect('/books/'.$book->id);
+        return redirect($book->path());
     }
 
     public function edit(Book $book) {
@@ -55,25 +43,23 @@ class BookController extends Controller
 
     public function update(Book $book) {
 
-        request()->validate([
-            'isbn'=>'required|digits:13',
-            'title'=>'required',
-            'description'=>'required'
-        ]);
+        $book->update($this->validateBook());
 
-        $book->isbn = request('isbn');
-        $book->title = request('title');
-        $book->description = request('description');
-
-        $book->save();
-
-        return redirect('/books/'.$book->id);
+        return redirect($book->path());
     }
 
     public function destroy(Book $book) {
 
         $book->delete();
 
-        return redirect('/books');
+        return redirect(route('books.index'));
+    }
+
+    private function validateBook(): array {
+        return request()->validate([
+            'isbn' => 'required|digits:13',
+            'title' => 'required',
+            'description' => 'required'
+        ]);
     }
 }

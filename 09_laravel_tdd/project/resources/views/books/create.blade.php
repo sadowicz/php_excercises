@@ -1,5 +1,5 @@
 <h2>Creating a book</h2>
-<form method="POST" action="/books">
+<form method="POST" action="{{route('books.index')}}">
     @csrf
     <div>
         <label>ISBN</label>

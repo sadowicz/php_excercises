@@ -5,10 +5,10 @@
 <li>Title: {{$book->title}}</li>
 <li>Description: @markdown {{$book->description}} @endmarkdown</li>
 
-<form method="GET" action="/books/{{$book->id}}/edit">
+<form method="GET" action="{{$book->path()}}/edit">
     <button>Edit</button>
 </form>
-<form method="POST" action="/books/{{$book->id}}">
+<form method="POST" action="{{$book->path()}}">
     @csrf
     @method('DELETE')
     <button>Delete</button>

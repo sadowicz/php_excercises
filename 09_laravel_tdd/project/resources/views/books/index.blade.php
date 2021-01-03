@@ -10,7 +10,7 @@
                 <td>{{$book->isbn}}</td>
                 <td>{{$book->title}}</td>
                 <td>
-                    <form method="GET" action="/books/{{$book->id}}">
+                    <form method="GET" action="{{$book->path()}}">
                         <button>Details</button>
                     </form>
                 </td>
@@ -21,6 +21,6 @@
     <p>No books in database.</p>
 @endif
 
-<form method="GET" action="/books/create">
+<form method="GET" action="{{route('books.create')}}">
     <button>Create new...</button>
 </form>
