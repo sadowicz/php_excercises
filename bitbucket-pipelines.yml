@@ -10,7 +10,9 @@ pipelines:
           - mysql
           - redis
         script:
-          - pushd 09_laravel_tdd/project/
+          - while ! timeout 1 bash -c "echo > /dev/tcp/localhost/3306"; do echo "Waiting for MySQL..."; sleep 1; done
+          - while ! timeout 1 bash -c "echo > /dev/tcp/localhost/6379"; do echo "Waiting for Redis..."; sleep 1; done
+          - pushd 10_laravel_tdd/project/
           -   composer install
           -   cp .env.example .env
           -   php artisan key:generate
